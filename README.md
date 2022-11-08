@@ -1,1 +1,1 @@
-Vite template example for <a href="https://github.com/DeepDoge/master.ts.git">Master.TS</a>
+Vite template example for <a href="https://github.com/DeepDoge/master.ts">Master.TS</a>
