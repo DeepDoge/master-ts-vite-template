@@ -6,6 +6,25 @@ import "./style.css"
 
 export const App = defineElement('x-app', () =>
 {
+  function myFragment(text: string)
+  {
+    return html`
+      <h2>My Fragment</h2>
+      <i>${text}</i>
+      <b>${text}</b>`
+  }
+
+  function myCode(code: string)
+  {
+    const fragment = document.createDocumentFragment()
+    const element = document.createElement('code')
+    element.textContent = code
+    const h2 = document.createElement('h2')
+    h2.textContent = 'My Code'
+    fragment.append(h2, element)
+    return fragment
+  }
+
   return html`
       <h1>Master.TS</h1>
       
@@ -27,6 +46,11 @@ export const App = defineElement('x-app', () =>
         Click me:
       </x>
 
+      ${myFragment('Hello World!')}
+
+      ${myCode('const x = 1;')}
+
+
       <style>
         *, *::before, *::after {
           box-sizing: border-box;
@@ -37,7 +61,8 @@ export const App = defineElement('x-app', () =>
           justify-items: center;
           place-content: center;
           min-height: 100vh;
-          gap: 1em;
+          gap: .5em;
+          padding: 2em 0;
         }
 
         img {
