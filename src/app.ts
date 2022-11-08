@@ -1,7 +1,7 @@
 import { defineElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/template"
 import { Counter } from "./counter"
-import typescriptLogo from "./typescript.svg"
+import image from "./make-it-yourself.webp"
 import "./style.css"
 
 export const App = defineElement('x-app', () =>
@@ -27,16 +27,7 @@ export const App = defineElement('x-app', () =>
 
   return html`
       <h1>Master.TS</h1>
-      
-      <div class="logos">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://www.typescriptlang.org/" target="_blank">
-          <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-        </a>
-      </div>
-      <h2>Vite + TypeScript</h2>
+      <img src=${image}/>
       
       <h2>Default Counter</h2>
       ${Counter({})}
@@ -66,25 +57,8 @@ export const App = defineElement('x-app', () =>
         }
 
         img {
+          width: min(20em, 100%);
           max-width: 100%;
-        }
-        
-        .logos {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1em;
-          width: min(15em, 100%);
-          place-items: stretch
-        }
-
-        .logos > * {
-          display: grid;
-          place-items: stretch;
-          aspect-ratio: 1;
-        }
-
-        .logos img {
-          object-fit: contain;
         }
       </style>
 `
