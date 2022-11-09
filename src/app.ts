@@ -26,6 +26,10 @@ export const App = defineElement('x-app', () =>
     h2.textContent = 'My Code'
     fragment.append(h2, element)
     return fragment
+    // Or:
+    return html`
+      <h2>My Code</h2>
+      <code>${code}</code>`
   }
 
   return html`
