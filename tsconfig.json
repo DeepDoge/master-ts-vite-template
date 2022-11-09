@@ -13,7 +13,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "removeComments": false,
+    "useUnknownInCatchVariables": true,
+    "importsNotUsedAsValues": "error",
+    "preserveConstEnums": true,
   },
   "include": ["src"]
 }

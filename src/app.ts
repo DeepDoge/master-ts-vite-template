@@ -1,8 +1,11 @@
-import { defineElement } from "master-ts/framework/element"
+import { defineElement, MasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/template"
 import { Counter } from "./counter"
 import image from "./make-it-yourself.webp"
-import "./style.css"
+
+const globalStyle = await html`<link rel="stylesheet" href="/style.css">`.renderFragment()
+document.head.append(globalStyle)
+MasterElement.globalFragment.append(globalStyle)
 
 export const App = defineElement('x-app', () =>
 {
@@ -43,10 +46,6 @@ export const App = defineElement('x-app', () =>
 
 
       <style>
-        *, *::before, *::after {
-          box-sizing: border-box;
-        }
-
         :host {
           display: grid;
           justify-items: center;
@@ -57,12 +56,12 @@ export const App = defineElement('x-app', () =>
         }
 
         img {
-          width: min(20em, 100%);
-          max-width: 100%;
+          width: min(30em, 100%);
+          border-radius: 1em;
         }
       </style>
 `
 })
 
 const app = App({})
-app.$mount(document.querySelector('#app')!)
+await app.$mount(document.querySelector('#app')!)
