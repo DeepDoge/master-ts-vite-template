@@ -3,9 +3,7 @@ import { html } from "master-ts/framework/template"
 import { Counter } from "./counter"
 import image from "./make-it-yourself.webp"
 
-const globalStyle = await html`<link rel="stylesheet" href="/style.css">`.renderFragment()
-document.head.append(globalStyle)
-MasterElement.globalFragment.append(globalStyle)
+MasterElement.globalFragment.append(await html`<link rel="stylesheet" href="/global.css">`.renderFragment())
 
 export const App = defineElement('x-app', () =>
 {
