@@ -4,7 +4,12 @@ import type { Counter } from "./counter"
 
 const CounterAsync = async (props: typeof Counter['PROPS_TYPE']) => (await import("./counter")).Counter(props)
 
-export const App = masterElement('my-app', ({ $ }) => 
+async function Hello()
+{
+  return html`<b>Hello</b>`
+}
+
+export const App = masterElement('my-app', async ({ $ }) => 
 {
   const toggleSignal = $.signal(false)
   const myCounter = CounterAsync({ startAt: 123 })
@@ -14,8 +19,15 @@ export const App = masterElement('my-app', ({ $ }) =>
       <h1>Master TS</h1>
 
       <h2>Counter</h2>
+      ${await Hello()}
+      ${$.await(Hello(), EMPTY_NODE)}
       ${$.await(CounterAsync({ startAt: 1 }), EMPTY_NODE)}
       ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
+
+      <x ${await CounterAsync({ startAt: 1 })}>
+        Click me!
+      </x>
+
       <button on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
     </main>
 
