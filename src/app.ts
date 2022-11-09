@@ -1,7 +1,7 @@
 import { defineElement, MasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/template"
 import { Counter } from "./counter"
-import image from "./make-it-yourself.webp"
+import image from "./assets/make-it-yourself.webp"
 
 // Nodes of this fragment are cloned into all MasterElement Shadow DOMs.
 // This is a good place to put global styles. 
