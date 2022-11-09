@@ -3,6 +3,8 @@ import { html } from "master-ts/framework/template"
 import { Counter } from "./counter"
 import image from "./make-it-yourself.webp"
 
+// Nodes of this fragment are cloned into all MasterElement Shadow DOMs.
+// This is a good place to put global styles. 
 MasterElement.globalFragment.append(await html`<link rel="stylesheet" href="/global.css">`.renderFragment())
 
 export const App = defineElement('x-app', () =>
