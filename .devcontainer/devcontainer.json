@@ -4,7 +4,7 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"bierner.lit-html"
+				"pushqrdx.inline-html"
 			]
 		}
 	}
