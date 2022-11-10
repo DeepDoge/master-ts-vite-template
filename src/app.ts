@@ -21,7 +21,7 @@ export const App = masterElement('my-app', async ({ $ }) =>
     <main>
       <h1>Master TS</h1>
 
-      <h2 :ref=${myH2} :class:test=${toggleSignal} class="foo" :on:click=${() => alert()}>Counter</h2>
+      <h2 :ref=${myH2} :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
       ${await Hello()}
       ${$.await(Hello(), EMPTY_NODE)}
       ${$.await(CounterAsync({ startAt: 1 }), EMPTY_NODE)}
