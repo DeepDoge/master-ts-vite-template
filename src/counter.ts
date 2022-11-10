@@ -7,7 +7,7 @@ interface Props
 }
 
 export const Counter = masterElement<Props>('my-counter', ({ props, $ }) =>
-{ 
+{
   const count = $.signal(props.startAt)
   const increment = () => count.set(count.value + 1)
 
