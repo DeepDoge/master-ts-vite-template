@@ -14,11 +14,14 @@ export const App = masterElement('my-app', async ({ $ }) =>
   const toggleSignal = $.signal(false)
   const myCounter = CounterAsync({ startAt: 123 })
 
+  const myH2 = $.signal<HTMLHeadingElement>(null!)
+  $.subscribe(myH2, () => console.log('myH2 changed', myH2.value))
+
   return html`
     <main>
       <h1>Master TS</h1>
 
-      <h2>Counter</h2>
+      <h2 :ref=${myH2}>Counter</h2>
       ${await Hello()}
       ${$.await(Hello(), EMPTY_NODE)}
       ${$.await(CounterAsync({ startAt: 1 }), EMPTY_NODE)}
