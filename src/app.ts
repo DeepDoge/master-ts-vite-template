@@ -1,14 +1,13 @@
-import { importMasterElementFactoryAsync, masterElement } from "master-ts/framework/element"
+import { importMasterElementFactoryAsAsync, masterElementFactory } from "master-ts/framework/element"
 import { EMPTY_NODE, html } from "master-ts/framework/fragment"
-
-const { Counter } = importMasterElementFactoryAsync(import('./counter'), 'Counter')
+const { Counter } = importMasterElementFactoryAsAsync(import('./counter'), 'Counter')
 
 async function Hello()
 {
   return html`<b>Hello</b>`
 }
 
-export const App = masterElement('my-app', async ({ $ }) => 
+export const App = masterElementFactory('my-app', async ({ $ }) => 
 {
   const toggleSignal = $.signal(false)
   const myCounter = Counter({ startAt: 1 })
@@ -20,13 +19,26 @@ export const App = masterElement('my-app', async ({ $ }) =>
     <main>
       <h1>Master TS</h1>
 
+      ${$.await
+      (
+        html`
+          <x ${Counter({ startAt: 123 })}>
+            Hey!
+          </x>`,
+        html`
+        <b>Loading...</b>`
+      )}
+
       <h2 :ref=${myH2} :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
-      ${await Hello()}
+      ${Hello()}
       ${$.await(Hello(), EMPTY_NODE)}
-      ${$.await(Counter({ startAt: 1 }), EMPTY_NODE)}
+
+      
+
+      
       ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
     
-      <x ${await Counter({ startAt: 1 })} hey=${$.derive(toggleSignal, (n) => n ? 'true' : 'false')}>
+      <x ${Counter({ startAt: 1 })} hey=${$.derive(toggleSignal, (n) => n ? 'true' : 'false')}>
         Click me!
       </x>
 

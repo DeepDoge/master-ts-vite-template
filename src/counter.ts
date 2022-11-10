@@ -1,4 +1,4 @@
-import { masterElement } from "master-ts/framework/element"
+import { masterElementFactory } from "master-ts/framework/element"
 import { html } from "master-ts/framework/fragment"
 
 interface Props
@@ -6,7 +6,7 @@ interface Props
   startAt: number
 }
 
-export const Counter = masterElement<Props>('my-counter', ({ props, $ }) =>
+export const Counter = masterElementFactory<Props>('my-counter', ({ props, $ }) =>
 {
   const count = $.signal(props.startAt)
   const increment = () => count.set(count.value + 1)
