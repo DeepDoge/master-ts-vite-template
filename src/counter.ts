@@ -12,5 +12,5 @@ export const Counter = masterElement<Props>('my-counter', ({ props, $ }) =>
   const increment = () => count.set(count.value + 1)
 
   return html`
-      <button on:click=${increment}><slot>Counter: </slot> ${count}</button>`
+      <button :on:click=${increment}><slot>Counter: </slot> ${count}</button>`
 })
