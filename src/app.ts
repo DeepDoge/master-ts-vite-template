@@ -24,7 +24,7 @@ export const App = masterElement('my-app', async ({ $ }) =>
       ${$.await(CounterAsync({ startAt: 1 }), EMPTY_NODE)}
       ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
 
-      <x ${await CounterAsync({ startAt: 1 })}>
+      <x ${await CounterAsync({ startAt: 1 })} hey=${$.derive(toggleSignal, (n) => n ? 'true' : 'false')}>
         Click me!
       </x>
 
