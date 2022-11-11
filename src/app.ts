@@ -1,28 +1,34 @@
-import { importMasterElementFactoryAsAsync, masterElementFactory } from "master-ts/framework/element"
+import { defineElement } from "master-ts/framework/element"
 import { EMPTY_NODE, html } from "master-ts/framework/fragment"
-const { Counter } = importMasterElementFactoryAsAsync(import('./counter'), 'Counter')
+import { importAsync } from "master-ts/utils/importAsync"
+
+const { Counter } = importAsync(import('./counter'), 'Counter')
 
 async function Hello()
 {
   return html`<b>Hello</b>`
 }
 
-export const App = masterElementFactory('my-app', async ({ $ }) => 
+const Element = defineElement('my-app')
+export function App()
 {
+  const element = Element()
+  const $ = element.$
+
   const toggleSignal = $.signal(false)
-  const myCounter = Counter({ startAt: 1 })
+  const myCounter = Counter(1)
 
   const myH2 = $.signal<HTMLHeadingElement>(null!)
   $.subscribe(myH2, () => console.log('myH2 changed', myH2.value))
 
-  return html`
+  return element.html`
     <main>
       <h1>Master TS</h1>
 
       ${$.await
       (
         html`
-          <x ${Counter({ startAt: 123 })}>
+          <x ${Counter(1)}>
             Hey!
           </x>`,
         html`
@@ -33,14 +39,7 @@ export const App = masterElementFactory('my-app', async ({ $ }) =>
       ${Hello()}
       ${$.await(Hello(), EMPTY_NODE)}
 
-      
-
-      
       ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
-    
-      <x ${Counter({ startAt: 1 })} hey=${$.derive(toggleSignal, (n) => n ? 'true' : 'false')}>
-        Click me!
-      </x>
 
       <button :on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
     </main>
@@ -49,8 +48,7 @@ export const App = masterElementFactory('my-app', async ({ $ }) =>
       @import url('/global.css');
     </style>
   `
-})
+}
 
-
-const app = App({})
+const app = await App()
 document.querySelector('#app')!.replaceWith(app)

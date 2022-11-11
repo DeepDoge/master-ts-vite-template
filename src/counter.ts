@@ -1,16 +1,34 @@
-import { masterElementFactory } from "master-ts/framework/element"
+import { defineElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/fragment"
+import { masterTooling } from "master-ts/framework/tooling"
 
-interface Props
+
+const Element = defineElement('my-counter')
+export function Counter(startAt: number)
 {
-  startAt: number
+  const element = Element()
+  const $ = element.$
+
+  const count = $.signal(startAt)
+  const increment = () => count.set(count.value + 1)
+
+  return element.html`
+  <button :on:click=${increment}>
+    <slot>Counter: </slot> ${count}
+  </button>`
 }
 
-export const Counter = masterElementFactory<Props>('my-counter', ({ props, $ }) =>
+export function CounterAsFragment(startAt: number, text = 'Counter: ')
 {
-  const count = $.signal(props.startAt)
+  const comment = document.createComment('my-counter')
+  const $ = masterTooling(comment)
+
+  const count = $.signal(startAt)
   const increment = () => count.set(count.value + 1)
 
   return html`
-      <button :on:click=${increment}><slot>Counter: </slot> ${count}</button>`
-})
+    ${comment}
+    <button :on:click=${increment}>
+      ${text} ${count}
+    </button>`
+}
