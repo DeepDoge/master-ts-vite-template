@@ -1,4 +1,4 @@
-import { master$ } from "master-ts/framework/$"
+import { injectOrGetMasterAPI } from "master-ts/framework/api"
 import { defineMasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/fragment"
 
@@ -21,7 +21,7 @@ export function Counter(startAt: number)
 export function CounterAsFragment(startAt: number, text = 'Counter: ')
 {
   const comment = document.createComment('my-counter')
-  const $ = master$(comment)
+  const $ = injectOrGetMasterAPI(comment)
 
   const count = $.signal(startAt)
   const increment = () => count.set(count.value + 1)
