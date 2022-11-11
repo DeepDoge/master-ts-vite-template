@@ -1,9 +1,9 @@
-import { defineElement } from "master-ts/framework/element"
+import { master$ } from "master-ts/framework/$"
+import { defineMasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/fragment"
-import { masterTooling } from "master-ts/framework/tooling"
 
 
-const Element = defineElement('my-counter')
+const Element = defineMasterElement('my-counter')
 export function Counter(startAt: number)
 {
   const element = Element()
@@ -21,7 +21,7 @@ export function Counter(startAt: number)
 export function CounterAsFragment(startAt: number, text = 'Counter: ')
 {
   const comment = document.createComment('my-counter')
-  const $ = masterTooling(comment)
+  const $ = master$(comment)
 
   const count = $.signal(startAt)
   const increment = () => count.set(count.value + 1)

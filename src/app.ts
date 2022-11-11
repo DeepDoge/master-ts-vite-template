@@ -1,11 +1,12 @@
-import { defineElement } from "master-ts/framework/element"
+import { defineMasterElement } from "master-ts/framework/element"
 import { EMPTY_NODE, html } from "master-ts/framework/fragment"
 import { signal } from "master-ts/framework/signal"
 import { importAsync } from "master-ts/utils/importAsync"
 
 const logs = signal<string[][]>([])
 const consoleLogOriginal = window.console.log
-window.console.log = (...args: any[]) => {
+window.console.log = (...args: any[]) =>
+{
   logs.change((logs) => logs.push(args.map((arg): string => arg.toString()).map((arg) => arg.startsWith('color:') ? '' : arg.replace(/%c/g, ''))))
   consoleLogOriginal(...args)
 }
@@ -17,7 +18,7 @@ async function Hello()
   return html`<b>Hello</b>`
 }
 
-const Element = defineElement('my-app')
+const Element = defineMasterElement('my-app')
 export function App()
 {
   const element = Element()
