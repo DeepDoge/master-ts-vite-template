@@ -1,6 +1,14 @@
 import { defineElement } from "master-ts/framework/element"
 import { EMPTY_NODE, html } from "master-ts/framework/fragment"
+import { signal } from "master-ts/framework/signal"
 import { importAsync } from "master-ts/utils/importAsync"
+
+const logs = signal<string[][]>([])
+const consoleLogOriginal = window.console.log
+window.console.log = (...args: any[]) => {
+  logs.change((logs) => logs.push(args.map((arg): string => arg.toString()).map((arg) => arg.startsWith('color:') ? '' : arg.replace(/%c/g, ''))))
+  consoleLogOriginal(...args)
+}
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
 
@@ -42,6 +50,13 @@ export function App()
       ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
 
       <button :on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
+
+      <div>
+        <h3>Logs</h3>
+        <ul>
+          ${$.derive(logs, (logs) => logs.map((log) => html`<li>${log.join(' ')}</li>`))}
+        </ul>
+      </div>
     </main>
 
     <style>
