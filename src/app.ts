@@ -45,9 +45,8 @@ export function App()
 
       <h2 :ref=${myH2} :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
       ${Hello()}
-      ${$.await(Hello(), EMPTY_NODE)}
-
-      ${$.derive(toggleSignal, (toggle) => toggle ? $.await(myCounter, EMPTY_NODE) : EMPTY_NODE)}
+      ${Counter(1)}
+      ${$.derive(toggleSignal, (toggle) => toggle ? myCounter : EMPTY_NODE)}
 
       <button :on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
 
