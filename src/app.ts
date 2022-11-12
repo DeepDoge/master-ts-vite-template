@@ -1,7 +1,7 @@
 import { defineMasterElement } from "master-ts/framework/element"
-import { EMPTY_NODE, html } from "master-ts/framework/fragment"
-import { SignalSubscriptionMode } from "master-ts/framework/signal/base"
+import { html } from "master-ts/framework/fragment"
 import { importAsync } from "master-ts/utils/importAsync"
+import makeItImage from './assets/make-it-yourself.webp'
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
 
@@ -19,33 +19,39 @@ export function App()
   const toggleSignal = $.signal(false)
   const myCounter = Counter(1)
 
-  const myH2 = $.signal<HTMLHeadingElement | null>(null)
-  $.subscribe(myH2, () => console.log('myH2 changed', myH2.value), { mode: SignalSubscriptionMode.Immediate })
-
   return element.html`
     <main>
       <h1>Master TS</h1>
+
+      <img src=${makeItImage} />
 
       ${$.await
       (
         html`
           <x ${Counter(1)}>
-            Hey!
+            Click me!
           </x>`,
         html`
         <b>Loading...</b>`
       )}
 
-      <h2 :ref=${myH2} :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
-      ${Hello()}
-      ${Counter(1)}
-      ${$.derive(toggleSignal, (toggle) => toggle ? myCounter : EMPTY_NODE)}
-
+      <h2 :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
       <button :on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
+      ${$.derive(toggleSignal, (toggle) => toggle ? myCounter : Hello())}
     </main>
 
     <style>
       @import url('/global.css');
+
+      main {
+        display: grid;
+        grid-template-columns: min(100%, 30em);
+        gap: 1em;
+
+        min-height: 100vh;
+        place-content: center;
+        justify-items: center;
+      }
     </style>
   `
 }
