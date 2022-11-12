@@ -35,9 +35,9 @@ export function App()
         <b>Loading...</b>`
       )}
 
-      <h2 :class:bar=${toggleSignal} :style:--my-var=${$.derive(toggleSignal, (v) => v ? 'a' : 'b')} class="foo">Counter</h2>
-      <button :on:click=${() => toggleSignal.set(!toggleSignal.value)}>Toggle</button>
-      ${$.derive(toggleSignal, (toggle) => toggle ? myCounter : Hello())}
+      <h2 :class:bar=${toggleSignal} :style:--my-var=${$.compute(() => toggleSignal.get() ? 'a' : 'b')} class="foo">Counter</h2>
+      <button :on:click=${() => toggleSignal.set(!toggleSignal.get())}>Toggle</button>
+      ${$.compute(() => toggleSignal.get() ? myCounter : Hello())}
     </main>
 
     <style>
