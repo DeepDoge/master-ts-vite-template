@@ -16,7 +16,7 @@ export function App()
   const element = Element()
   const $ = element.$
 
-  const toggleSignal = $.signal(false)
+  const toggle = $.signal(false)
   const myCounter = Counter(1)
 
   return element.html`
@@ -35,9 +35,9 @@ export function App()
         <b>Loading...</b>`
       )}
 
-      <h2 :class:bar=${toggleSignal} :style:--my-var=${$.compute(() => toggleSignal.get() ? 'a' : 'b')} class="foo">Counter</h2>
-      <button :on:click=${() => toggleSignal.set(!toggleSignal.get())}>Toggle</button>
-      ${$.compute(() => toggleSignal.get() ? myCounter : Hello())}
+      <h2 :class:bar=${toggle} :style:--my-var=${$.derive(() => toggle.get() ? 'a' : 'b')} class="foo">Counter</h2>
+      <button :on:click=${() => toggle.set(!toggle.get())}>Toggle</button>
+      ${$.derive(() => toggle.get() ? myCounter : Hello())}
     </main>
 
     <style>
