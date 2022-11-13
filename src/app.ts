@@ -1,14 +1,17 @@
 import { defineMasterElement } from "master-ts/framework/element"
-import { html } from "master-ts/framework/fragment"
+import { createTemplateCache, html } from "master-ts/framework/template"
 import { importAsync } from "master-ts/utils/importAsync"
 import makeItImage from './assets/make-it-yourself.webp'
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
 
+const helloTemplateCache = createTemplateCache()
 async function Hello()
 {
-  return html`<b>Hello</b>`
+  return helloTemplateCache.html`<b>Hello</b>`
 }
+Hello()
+Counter(2)
 
 const Element = defineMasterElement('my-app')
 export function App()
@@ -35,7 +38,7 @@ export function App()
         <b>Loading...</b>`
       )}
 
-      <h2 :class:bar=${toggle} :style:--my-var=${$.derive(() => toggle.value ? 'a' : 'b')} class="foo">Counter</h2>
+      <h2 :class:bar=${toggle} :style:--my-var="a ${$.derive(() => toggle.value ? 'a' : 'b')}" class="foo">Counter</h2>
       <button :on:click=${() => toggle.value = !toggle.value}>Toggle</button>
       ${$.derive(() => toggle.value ? myCounter : Hello())}
     </main>
