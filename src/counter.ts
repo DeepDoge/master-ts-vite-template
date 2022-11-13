@@ -8,7 +8,7 @@ export function Counter(startAt: number)
   const $ = element.$
 
   const count = $.signal(startAt)
-  const increment = () => count.set(count.get() + 1)
+  const increment = () => count.value += 1
 
   return element.html`
   <button :on:click=${increment}>
