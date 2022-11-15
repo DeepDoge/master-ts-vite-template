@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "master-ts": "github:DeepDoge/master.ts",
+    "master-ts": "github:DeepDoge/master-ts",
     "typescript": "^4.6.4",
     "vite": "^3.2.3"
   }
