@@ -3,10 +3,7 @@ import { html } from "master-ts/framework/template"
 import { importAsync } from "master-ts/framework/utils/importAsync"
 import makeItImage from '@/assets/make-it-yourself.webp'
 
-MasterElement.globalFragment.append(html`
-  <head>
-    <link rel="stylesheet" href="/styles/global.css" />
-  </head>`)
+MasterElement.globalFragment.append(html`<link rel="stylesheet" href="/styles/global.css" />`)
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
 
