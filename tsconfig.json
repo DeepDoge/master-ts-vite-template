@@ -18,6 +18,10 @@
     "useUnknownInCatchVariables": true,
     "importsNotUsedAsValues": "error",
     "preserveConstEnums": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src"],
 }

@@ -4,5 +4,11 @@ export default defineConfig({
     plugins: [],
     build: {
         target: 'esnext'
-    }
+    },
+    resolve: {
+        alias: {
+          '@': './src'
+        }
+      },
+    
 })

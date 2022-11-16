@@ -1,7 +1,12 @@
-import { defineMasterElement } from "master-ts/framework/element"
+import { defineMasterElement, MasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/template"
 import { importAsync } from "master-ts/framework/utils/importAsync"
-import makeItImage from './assets/make-it-yourself.webp'
+import makeItImage from '@/assets/make-it-yourself.webp'
+
+MasterElement.globalFragment.append(html`
+  <head>
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>`)
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
 
@@ -36,8 +41,6 @@ export function App()
     </main>
 
     <style>
-      @import url('/global.css');
-
       main {
         display: grid;
         grid-template-columns: min(100%, 30em);
