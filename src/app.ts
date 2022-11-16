@@ -1,6 +1,6 @@
 import { defineMasterElement } from "master-ts/framework/element"
 import { html } from "master-ts/framework/template"
-import { importAsync } from "master-ts/utils/importAsync"
+import { importAsync } from "master-ts/framework/utils/importAsync"
 import makeItImage from './assets/make-it-yourself.webp'
 
 const { Counter } = importAsync(import('./counter'), 'Counter')
