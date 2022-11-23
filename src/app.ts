@@ -22,18 +22,12 @@ export function App()
 
       <img src=${makeItImage} />
 
-      ${$.await
-      (
-        html`
-          <x ${Counter(1)}>
-            Click me!
-          </x>`,
-        html`
-        <b>Loading...</b>`
-      )}
+      <x ${Counter(1)}>
+        Click me!
+      </x>
     
-      <h2 :class:bar=${toggle} :style:--my-var="a ${() => toggle.value ? 'a' : 'b'}" class="foo">Counter</h2>
-      <button :on:click=${() => toggle.value = !toggle.value}>Toggle</button>
+      <h2 class:bar=${toggle} style:--my-var="a ${() => toggle.value ? 'a' : 'b'}" class="foo">Counter</h2>
+      <button on:click=${() => toggle.value = !toggle.value}>Toggle</button>
       ${() => toggle.value ? myCounter : "Hello World!"}
     </main>
 
@@ -52,4 +46,4 @@ export function App()
 }
 
 const app = App()
-document.querySelector('#app')!.replaceWith(app)
+document.querySelector('#app')!.replaceWith(await app)

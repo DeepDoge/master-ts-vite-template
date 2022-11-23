@@ -11,7 +11,7 @@ export function Counter(startAt: number)
   const increment = () => count.value += 1
 
   return element.html`
-  <button :on:click=${increment}>
+  <button on:click=${increment}>
     <slot>Counter: </slot> ${count}
   </button>`
 }
