@@ -1,4 +1,4 @@
-import { defineMasterElement } from "master-ts/framework/element"
+import { defineMasterElement } from "master-ts/library/element"
 
 
 const Element = defineMasterElement('my-counter')

@@ -1,7 +1,7 @@
 import makeItImage from '@/assets/make-it-yourself.webp'
-import { defineMasterElement, MasterElement } from "master-ts/framework/element"
-import { html } from "master-ts/framework/template"
-import { importAsync } from "master-ts/framework/utils/importAsync"
+import { defineMasterElement, MasterElement } from "master-ts/library/element"
+import { html } from "master-ts/library/template"
+import { importAsync } from "master-ts/library/utils/importAsync"
 
 MasterElement.globalFragment.append(html`<link rel="stylesheet" href="/styles/global.css" />`)
 
