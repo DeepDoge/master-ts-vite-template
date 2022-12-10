@@ -26,7 +26,7 @@ export function App()
       {
         await new Promise((resolve) => setTimeout(resolve, 1000))
         return html`<x ${await Counter(1)}>Click me!</x>`
-      })(), null)}
+      })(), 'Loading...')}
 
       <h2 class:bar=${toggle} style:--my-var="a ${$.derive(($) => $(toggle).value ? 'a' : 'b')}" class="foo">Counter</h2>
       <button on:click=${() => toggle.value = !toggle.value}>Toggle</button>
