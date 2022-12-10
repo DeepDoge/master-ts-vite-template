@@ -22,10 +22,12 @@ export function App()
 
       <img src=${makeItImage} />
 
-      <x ${Counter(1)}>
-        Click me!
-      </x>
-    
+      ${$.await((async () => 
+      {
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        return html`<x ${await Counter(1)}>Click me!</x>`
+      })(), null)}
+
       <h2 class:bar=${toggle} style:--my-var="a ${$.derive(($) => $(toggle).value ? 'a' : 'b')}" class="foo">Counter</h2>
       <button on:click=${() => toggle.value = !toggle.value}>Toggle</button>
       ${$.derive(($) => $(toggle).value ? myCounter : "Hello World!")}
@@ -46,4 +48,4 @@ export function App()
 }
 
 const app = App()
-document.querySelector('#app')!.replaceWith(await app)
+document.querySelector('#app')!.replaceWith(app)
