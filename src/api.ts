@@ -1,6 +1,6 @@
-import type { HttpProxy } from 'vite'
+import type { IncomingMessage, ServerResponse, RequestOptions } from "http"
 
-export const api: HttpProxy.Server['web'] = (req, res, options) => 
+export async function api<T extends IncomingMessage>(req: T, res: ServerResponse<T>, options: RequestOptions)
 {
     res.end('Hello World')
 }
